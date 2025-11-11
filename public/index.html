@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Test Blog</title>
+  <link rel="stylesheet" href="/public/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Test Blog</h1>
+    <div id="posts">
+      <em>Loading posts...</em>
+    </div>
+    <div id="post-content"></div>
+  </div>
+
+  <script>
+    async function loadPosts() {
+      const res = await fetch('/api/posts');
+      const posts = await res.json();
+      const postsEl = document.getElementById('posts');
+      postsEl.innerHTML = '';
+      if (!posts.length) {
+        postsEl.innerHTML = '<p>No posts found.</p>';
+        return;
+      }
+      const ul = document.createElement('ul');
+      posts.forEach(p => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#';
+        a.textContent = p.title || p.slug;
+        a.onclick = (e) => { e.preventDefault(); showPost(p.slug); };
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      postsEl.appendChild(ul);
+    }
+
+    async function showPost(slug) {
+      const res = await fetch('/api/posts/' + slug);
+      if (!res.ok) {
+        document.getElementById('post-content').innerHTML = '<p>Post not found.</p>';
+        return;
+      }
+      const { html } = await res.json();
+      document.getElementById('post-content').innerHTML = html;
+      window.scrollTo(0, document.getElementById('post-content').offsetTop);
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
