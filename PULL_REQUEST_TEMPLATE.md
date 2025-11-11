@@ -1,0 +1,1 @@
+This PR adds a minimal test blog hosting site: Express server, frontend, Dockerfile, docker-compose, and sample posts. Branch: test-blog. Please review files and run locally to test.
