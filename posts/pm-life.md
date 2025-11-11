@@ -24,3 +24,10 @@ Advice I’d give my past self:
 A closing thought
 
 Product management is less about heroic vision and more about patient leadership: nudging a team toward a better answer and celebrating the tiny, iterative wins along the way.
+
+---
+title: "Life as a PM"
+date: "2025-11-11T00:53:40Z"
+tags: ["product-management", "pm", "life"]
+author: "ujpugali-bit"
+---
